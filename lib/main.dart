@@ -1,3 +1,4 @@
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -37,29 +38,19 @@ class MyHomePage extends StatelessWidget {
           ),
           itemCount: 9,
           itemBuilder: (BuildContext context, int index) {
-            return CardWidget(index: index);
+            return FlipCard(
+              fill: Fill.fillBack,
+              direction: FlipDirection.HORIZONTAL, // default
+              front: Container(
+                color: Colors.blue,
+                child: const Center(child: Text('Front')),
+              ),
+              back: Container(
+                color: Colors.red,
+                child: Center(child: Text('${index + 1}')),
+              ),
+            );
           }),
-    );
-  }
-}
-
-class CardWidget extends StatelessWidget {
-  final int index;
-
-  const CardWidget({super.key, required this.index});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // handle tap
-      },
-      child: Container(
-        color: Colors.blue,
-        child: Center(
-          child: Text('Card ${index + 1}'),
-        ),
-      ),
     );
   }
 }
