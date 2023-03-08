@@ -1,5 +1,5 @@
-import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:memo_game/components/filp_card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,31 +26,44 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late List<String> simbols = [
+      "!",
+      "!",
+      "@",
+      "@",
+      "#",
+      "#",
+      "\$",
+      "\$",
+      "%",
+      "%",
+      "^",
+      "^",
+    ];
+    simbols.shuffle();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Card'),
       ),
       body: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-          ),
-          itemCount: 9,
-          itemBuilder: (BuildContext context, int index) {
-            return FlipCard(
-              fill: Fill.fillBack,
-              direction: FlipDirection.HORIZONTAL, // default
-              front: Container(
-                color: Colors.blue,
-                child: const Center(child: Text('Front')),
-              ),
-              back: Container(
-                color: Colors.red,
-                child: Center(child: Text('${index + 1}')),
-              ),
-            );
-          }),
+        padding: const EdgeInsets.symmetric(
+          vertical: 40,
+          horizontal: 20,
+        ),
+        itemCount: 12,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          childAspectRatio: 1 / 1,
+        ),
+        itemBuilder: (context, index) {
+          return FilpCard(
+            simbol: simbols[index],
+          );
+        },
+      ),
     );
   }
 }
