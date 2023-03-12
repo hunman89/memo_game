@@ -67,6 +67,7 @@ class _FilpCardState extends State<FilpCard> with TickerProviderStateMixin {
           child: _animation.value <= 0.5
               ? FrontCard(
                   backgroundColor: Theme.of(context).primaryColor,
+                  simbol: '?',
                 )
               : BackCard(
                   simbol: widget.simbol,
