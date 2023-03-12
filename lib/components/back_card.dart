@@ -1,25 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:memo_game/components/game_card.dart';
 
-class BackCard extends StatelessWidget {
-  final String simbol;
+class BackCard extends GameCard {
   const BackCard({
     super.key,
-    required this.simbol,
+    required super.simbol,
+    required super.backgroundColor,
   });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey,
-      child: Center(
-        child: Text(
-          simbol,
-          style: const TextStyle(
-            fontSize: 50,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
 }
