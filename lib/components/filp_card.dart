@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -6,9 +7,11 @@ import 'package:memo_game/components/front_card.dart';
 
 class FilpCard extends StatefulWidget {
   final String simbol;
+  final int order;
   const FilpCard({
     super.key,
     required this.simbol,
+    required this.order,
   });
 
   @override
@@ -28,6 +31,14 @@ class _FilpCardState extends State<FilpCard> with TickerProviderStateMixin {
     }
   }
 
+  void showBackSimbolAfterSeconds(int seconds) {
+    Timer(Duration(seconds: seconds), () {
+      if (_status == AnimationStatus.dismissed) {
+        _controller.forward().whenComplete(() => _controller.reverse());
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +51,7 @@ class _FilpCardState extends State<FilpCard> with TickerProviderStateMixin {
       ..addStatusListener((status) {
         _status = status;
       });
+    showBackSimbolAfterSeconds(widget.order);
   }
 
   @override
@@ -53,9 +65,12 @@ class _FilpCardState extends State<FilpCard> with TickerProviderStateMixin {
         onTap: filp,
         child: Card(
           child: _animation.value <= 0.5
-              ? const FrontCard()
+              ? FrontCard(
+                  backgroundColor: Theme.of(context).primaryColor,
+                )
               : BackCard(
                   simbol: widget.simbol,
+                  backgroundColor: Theme.of(context).disabledColor,
                 ),
         ),
       ),

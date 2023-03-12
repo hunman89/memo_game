@@ -33,12 +33,6 @@ class MyHomePage extends StatelessWidget {
       "@",
       "#",
       "#",
-      "\$",
-      "\$",
-      "%",
-      "%",
-      "^",
-      "^",
     ];
     simbols.shuffle();
 
@@ -51,7 +45,7 @@ class MyHomePage extends StatelessWidget {
           vertical: 40,
           horizontal: 20,
         ),
-        itemCount: 12,
+        itemCount: 6,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           mainAxisSpacing: 10,
@@ -61,6 +55,7 @@ class MyHomePage extends StatelessWidget {
         itemBuilder: (context, index) {
           return FilpCard(
             simbol: simbols[index],
+            order: index,
           );
         },
       ),
